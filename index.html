@@ -111,61 +111,72 @@
                 <div class="battery-percentage">Battery percentage: <span id="level"></span></div>
                 <div class="charge-time">Exp charge time: <span id="chargingTime"></span></div>
                 <div class="discharge-time">Exp discharge time: <span id="dischargingTime"></span></div>
+                <button id="request-permission">Enable Notifications</button>
             </div>
         </div>
     </div>
 
     <script>
-        // This function runs when the page loads
         window.onload = function () {
-            // Function to update the battery information on the page
-            function updateBatteryStatus(battery) {
-                // Show if the battery is charging or not
-                document.getElementById('charging').innerText = battery.charging ? 'Charging' : 'Not Charging'
-                // Show the battery level (0 to 1, so we multiply by 100 for percentage)
-                document.getElementById('level').innerText = (battery.level * 100).toFixed(0) + '%'
+            const notificationThreshold = 55;
 
-                // Show the charging time in minutes
-                document.getElementById('chargingTime').innerText = (battery.chargingTime / 60).toFixed(0) + ' minutes'
-                // Show the discharging time in minutes
-                document.getElementById('dischargingTime').innerText = (battery.dischargingTime / 60).toFixed(0) + ' minutes'
-
-                const batteryPercentage = (battery.level * 100).toFixed(0)
-                const batteryCharge = battery.charging
-                const expBatteryPercentage = "55"
-
-                if (batteryCharge === true && batteryPercentage === expBatteryPercentage) {
-                    alert("Battery charge: " + batteryPercentage)
+            function showNotification(title, body) {
+                if (Notification.permission === "granted") {
+                    new Notification(title, { body: body });
                 }
             }
 
-            // Get the battery information
-            navigator.getBattery().then(function (battery) {
-                // The navigator.getBattery() method returns a promise that resolves to a BatteryManager object, which contains information about the battery.When the promise resolves, the updateBatteryStatus(battery) function is called to display the initial battery status
-
-                // Update the battery status when we first get the information
-                updateBatteryStatus(battery)
-
-                // Update the battery status when it changes
-                battery.onchargingchange = function () {
-                    updateBatteryStatus(battery)
+            function requestNotificationPermission() {
+                if (Notification.permission === "default") {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === "granted") {
+                            alert("Notifications enabled!");
+                        } else {
+                            alert("Notifications are blocked. Please enable them in your browser settings.");
+                        }
+                    });
                 }
+            }
 
-                battery.onlevelchange = function () {
-                    updateBatteryStatus(battery)
-                }
+            document.getElementById('request-permission').addEventListener('click', requestNotificationPermission);
 
-                battery.onchargingtimechange = function () {
-                    updateBatteryStatus(battery)
-                }
+            function updateBatteryStatus(battery) {
+                document.getElementById('charging').innerText = battery.charging ? 'Charging' : 'Not Charging';
+                document.getElementById('level').innerText = (battery.level * 100).toFixed(0) + '%';
+                document.getElementById('chargingTime').innerText = (battery.chargingTime / 60).toFixed(0) + ' minutes';
+                document.getElementById('dischargingTime').innerText = (battery.dischargingTime / 60).toFixed(0) + ' minutes';
 
-                battery.ondischargingtimechange = function () {
-                    updateBatteryStatus(battery)
+                const batteryPercentage = (battery.level * 100).toFixed(0);
+                if (battery.charging && batteryPercentage == notificationThreshold) {
+                    showNotification("Battery Charge Alert", "Battery charge: " + batteryPercentage + "%");
                 }
-            })
+            }
+
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function (battery) {
+                    updateBatteryStatus(battery);
+
+                    battery.onchargingchange = function () {
+                        updateBatteryStatus(battery);
+                    }
+
+                    battery.onlevelchange = function () {
+                        updateBatteryStatus(battery);
+                    }
+
+                    battery.onchargingtimechange = function () {
+                        updateBatteryStatus(battery);
+                    }
+
+                    battery.ondischargingtimechange = function () {
+                        updateBatteryStatus(battery);
+                    }
+                });
+            } else {
+                alert("Battery Status API is not supported in this browser.");
+            }
         }
     </script>
-
 </body>
 
 </html>
