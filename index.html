@@ -132,8 +132,9 @@
 
                 const batteryPercentage = (battery.level * 100).toFixed(0)
                 const batteryCharge = battery.charging
+                const expBatteryPercentage = "55"
 
-                if (batteryCharge === true && batteryPercentage === "55") {
+                if (batteryCharge === true && batteryPercentage === expBatteryPercentage) {
                     alert("Battery charge: " + batteryPercentage)
                 }
             }
