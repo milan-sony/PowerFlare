@@ -124,22 +124,18 @@
                 document.getElementById('charging').innerText = battery.charging ? 'Charging' : 'Not Charging'
                 // Show the battery level (0 to 1, so we multiply by 100 for percentage)
                 document.getElementById('level').innerText = (battery.level * 100).toFixed(0) + '%'
-                console.log((battery.level * 100).toFixed(0) + '%')
-
-                const batteryPercentage = (battery.level * 100).toFixed(0)
-                const batteryCharge = battery.charging
-
-                console.log("Battery Percentage: ", batteryPercentage)
-                console.log("Battery charge: ", batteryCharge)
-
-                if (batteryCharge === true && batteryPercentage === "55") {
-                    alert("Battery charge: " + batteryPercentage)
-                }
 
                 // Show the charging time in minutes
                 document.getElementById('chargingTime').innerText = (battery.chargingTime / 60).toFixed(0) + ' minutes'
                 // Show the discharging time in minutes
                 document.getElementById('dischargingTime').innerText = (battery.dischargingTime / 60).toFixed(0) + ' minutes'
+
+                const batteryPercentage = (battery.level * 100).toFixed(0)
+                const batteryCharge = battery.charging
+
+                if (batteryCharge === true && batteryPercentage === "55") {
+                    alert("Battery charge: " + batteryPercentage)
+                }
             }
 
             // Get the battery information
