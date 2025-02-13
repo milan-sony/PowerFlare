@@ -29,6 +29,9 @@
         padding: 20px;
         background-color: whitesmoke;
         border-radius: 20px;
+    }
+
+    .inner-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -61,6 +64,27 @@
     .discharge-time {
         color: grey;
         font-size: 18px;
+        padding-bottom: 20px;
+    }
+
+    .btn-div {
+        display: flex;
+        justify-content: end;
+    }
+
+    .notification {
+        width: 150px;
+        height: 30px;
+        border: none;
+        color: white;
+        font-size: 12px;
+        border-radius: 20px;
+        background-color: #77B255;
+    }
+
+    .notification:hover {
+        background-color: gray;
+        color: white;
     }
 
     /* Custom Media Query */
@@ -87,6 +111,12 @@
             height: 80px;
             padding: 10px;
         }
+
+        .notification {
+            width: 100px;
+            height: 20px;
+            font-size: 8px;
+        }
     }
 
     /* medium devices */
@@ -103,15 +133,19 @@
 
     <div class="main-container">
         <div class="wrapper">
-            <div class="left-div">
-                <img src="./assets/android-chrome-512x512.png" alt="icon" class="icon">
+            <div class="inner-wrapper">
+                <div class="left-div">
+                    <img src="./assets/android-chrome-512x512.png" alt="icon" class="icon">
+                </div>
+                <div class="right-div">
+                    <div class="battery-status">Battery status: <span id="charging"></span></div>
+                    <div class="battery-percentage">Battery percentage: <span id="level"></span></div>
+                    <div class="charge-time">Exp charge time: <span id="chargingTime"></span></div>
+                    <div class="discharge-time">Exp discharge time: <span id="dischargingTime"></span></div>
+                </div>
             </div>
-            <div class="right-div">
-                <div class="battery-status">Battery status: <span id="charging"></span></div>
-                <div class="battery-percentage">Battery percentage: <span id="level"></span></div>
-                <div class="charge-time">Exp charge time: <span id="chargingTime"></span></div>
-                <div class="discharge-time">Exp discharge time: <span id="dischargingTime"></span></div>
-                <button id="request-permission">Enable Notifications</button>
+            <div class="btn-div">
+                <button id="request-permission" class="notification">Enable Notifications</button>
             </div>
         </div>
     </div>
