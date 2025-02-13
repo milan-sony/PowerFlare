@@ -17,6 +17,42 @@
         </div>
     </div>
 
+    <script>
+        // This function runs when the page loads
+        window.onload = function () {
+            // Function to update the battery information on the page
+            function updateBatteryStatus(battery) {
+                // Show if the battery is charging or not
+                document.getElementById('charging').innerText = battery.charging ? 'Charging' : 'Not Charging'
+                // Show the battery level (0 to 1, so we multiply by 100 for percentage)
+                document.getElementById('level').innerText = (battery.level * 100).toFixed(0) + '%'
+                // Show the discharging time in minutes
+                document.getElementById('dischargingTime').innerText = (battery.dischargingTime / 60).toFixed(0) + ' minutes'
+            }
+
+            // Get the battery information
+            navigator.getBattery().then(function (battery) {
+                // The navigator.getBattery() method returns a promise that resolves to a BatteryManager object, which contains information about the battery.When the promise resolves, the updateBatteryStatus(battery) function is called to display the initial battery status
+
+                // Update the battery status when we first get the information
+                updateBatteryStatus(battery)
+
+                // Update the battery status when it changes
+                battery.onchargingchange = function () {
+                    updateBatteryStatus(battery)
+                }
+
+                battery.onlevelchange = function () {
+                    updateBatteryStatus(battery)
+                }
+
+                battery.ondischargingtimechange = function () {
+                    updateBatteryStatus(battery)
+                }
+            })
+        }
+    </script>
+
 </body>
 
 </html>
