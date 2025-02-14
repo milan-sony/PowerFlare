@@ -152,13 +152,17 @@
 
     <script>
         window.onload = function () {
-            const notificationThreshold = 80;
+            const notificationThreshold = 30;
 
             function showNotification(title, body) {
                 if (Notification.permission === "granted") {
-                    new Notification(title, { body: body }, {icon: "./assets/android-chrome-512x512.png"});
+                    new Notification(title, {
+                        body: body,
+                        icon: './assets/android-chrome-512x512.png'
+                    });
                 }
             }
+
 
             function requestNotificationPermission() {
                 if (Notification.permission === "default") {
