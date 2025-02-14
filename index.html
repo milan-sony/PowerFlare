@@ -35,12 +35,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
     }
 
     .icon {
         width: auto;
-        height: 120px;
+        height: 80px;
         padding: 10px;
     }
 
@@ -114,7 +114,7 @@
 
         .icon {
             width: auto;
-            height: 80px;
+            height: 50px;
             padding: 10px;
         }
 
@@ -157,8 +157,8 @@
                 <div class="right-div">
                     <div class="battery-status">Battery status: <span id="charging"></span></div>
                     <div class="battery-percentage">Battery percentage: <span id="level"></span></div>
-                    <div class="charge-time">Exp charge time: <span id="chargingTime"></span></div>
-                    <div class="discharge-time">Exp discharge time: <span id="dischargingTime"></span></div>
+                    <!-- <div class="charge-time">Exp charge time: <span id="chargingTime"></span></div> -->
+                    <!-- <div class="discharge-time">Exp discharge time: <span id="dischargingTime"></span></div> -->
                 </div>
             </div>
             <div class="btn-div">
@@ -207,8 +207,8 @@
             function updateBatteryStatus(battery) {
                 document.getElementById('charging').innerText = battery.charging ? 'Charging' : 'Not Charging';
                 document.getElementById('level').innerText = (battery.level * 100).toFixed(0) + '%';
-                document.getElementById('chargingTime').innerText = (battery.chargingTime / 60).toFixed(0) + ' minutes';
-                document.getElementById('dischargingTime').innerText = (battery.dischargingTime / 60).toFixed(0) + ' minutes';
+                // document.getElementById('chargingTime').innerText = (battery.chargingTime / 60).toFixed(0) + ' minutes';
+                // document.getElementById('dischargingTime').innerText = (battery.dischargingTime / 60).toFixed(0) + ' minutes';
 
                 const batteryPercentage = (battery.level * 100).toFixed(0);
                 if (battery.charging && batteryPercentage == notificationThreshold) {
@@ -228,13 +228,13 @@
                         updateBatteryStatus(battery);
                     }
 
-                    battery.onchargingtimechange = function () {
-                        updateBatteryStatus(battery);
-                    }
+                    // battery.onchargingtimechange = function () {
+                    //     updateBatteryStatus(battery);
+                    // }
 
-                    battery.ondischargingtimechange = function () {
-                        updateBatteryStatus(battery);
-                    }
+                    // battery.ondischargingtimechange = function () {
+                    //     updateBatteryStatus(battery);
+                    // }
                 });
             } else {
                 alert("Battery Status API is not supported in this browser.");
