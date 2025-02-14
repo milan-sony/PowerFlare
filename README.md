@@ -12,7 +12,7 @@ A web app that monitors phone battery percentage and gives an alert when the bat
   
 - Notification: JavaScript `alert()`, Web notification API
 
-### 🌟Key Features
+### 🌟 Key Features
 
 - Progressive Web App (PWA)
   
