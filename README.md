@@ -8,11 +8,19 @@ A web app that monitors phone battery percentage and gives an alert when the bat
 
 - Frontend: HTML, CSS, JavaScript
 
-- Battery Status API:navigator.getBattery()
+- Battery Status API: `navigator.getBattery()`
+  
+- Notification: JavaScript `alert()`, Web notification API
 
 ### 🌟Key Features
-Battery Status Display: Shows whether the device is charging, the battery percentage, expected charging time, and expected discharging time.
-Notification System: Users can enable notifications, which will alert them when the battery reaches a certain level.
+
+- Progressive Web App (PWA)
+  
+- Lightweight and mobile friendly
+
+- Battery Status Display: Shows whether the device is charging, the battery percentage, expected charging time, and expected discharging time
+
+- Notification System: Users can enable notifications, which will alert them when the battery reaches a certain level
 
 ### ❗ Keep in mind
 
