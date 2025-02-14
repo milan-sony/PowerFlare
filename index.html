@@ -170,19 +170,16 @@
 
     <script>
         window.onload = function () {
-            const notificationThreshold = 61;
-            const alertSound = new Audio('./assets/clock_alert.mp3');
+            const notificationThreshold = 93;
 
             function showNotification(title, body) {
                 if (Notification.permission === "granted") {
-                    // Trigger vibration
-                    navigator.vibrate([200, 100, 200]); // Vibrate for 200ms, pause for 100ms, then vibrate for 200ms
 
                     // Get current timestamp
-                    const timestamp = new Date().toLocaleString();
+                    const timestamp = new Date().toLocaleTimeString();
 
                     // Include timestamp in the notification body
-                    const notificationBody = `${body}\nTimestamp: ${timestamp}`;
+                    const notificationBody = `${body}\nTime: ${timestamp}`;
 
                     // Show notification
                     new Notification(title, {
@@ -190,8 +187,6 @@
                         icon: './assets/android-chrome-512x512.png',
                     });
 
-                    // Play alert sound
-                    alertSound.play();
                 }
             }
 
