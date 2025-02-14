@@ -35,6 +35,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding-bottom: 20px;
     }
 
     .icon {
@@ -45,26 +46,25 @@
 
     .battery-status {
         color: black;
-        font-size: 36px;
+        font-size: 32px;
         padding-bottom: 10px;
     }
 
     .battery-percentage {
         color: grey;
-        font-size: 32px;
-        padding-bottom: 10px;
+        font-size: 24px;
+        padding-bottom: 16px;
     }
 
     .charge-time {
         color: gray;
-        font-size: 18px;
-        padding-bottom: 8px;
+        font-size: 16px;
+        padding-bottom: 6px;
     }
 
     .discharge-time {
         color: grey;
-        font-size: 18px;
-        padding-bottom: 20px;
+        font-size: 16px;
     }
 
     .btn-div {
@@ -170,7 +170,7 @@
 
     <script>
         window.onload = function () {
-            const notificationThreshold = 30;
+            const notificationThreshold = 15;
 
             function showNotification(title, body) {
                 if (Notification.permission === "granted") {
